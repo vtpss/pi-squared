@@ -1,19 +1,22 @@
 # $\pi^2$: Structure-based Reasoning Data Improves Long-Context Reasoning Ability of Large Language Models
 
-![$\pi^2$](./media/data_pipeline.png)
-
-[![OpenReview](https://img.shields.io/badge/OpenReview-4yDpwREyhm-802019.svg?logo=OpenReview)(https://openreview.net/forum?id=4yDpwREyhm)
+[![OpenReview](https://img.shields.io/badge/OpenReview-4yDpwREyhm-802019.svg?logo=OpenReview)](https://openreview.net/forum?id=4yDpwREyhm)
 [![arXiv](https://img.shields.io/badge/Arxiv-2604.05114-AD1C18.svg?logo=arXiv)](https://arxiv.org/abs/2604.05114)
 [![Google Drive](https://img.shields.io/badge/Google%20Drive-Data-fbbd04)](https://drive.google.com/drive/folders/1ISRgLijDFvwFpHzV4tmHix6MIwIGG2gd?usp=sharing)
 <!-- # https://github.com/DataArcTech/LongFaith: Sample on how to use https://img.shields.io/badge -->
 
+![$\pi^2$](./media/data_pipeline.png)
+
 
 ## Overview
 
-We introduce $\pi^2$ (in plain text, Pi^2), a pipeline that 1) transforms Wikipedia tables and documents into high-quality complex multi-document QA data and 2) back-translates long-context reasoning traces from the context, question, and ground-truth answer.
+We introduce $\pi^2$ (in plain text, Pi^2), a pipeline that 
+1) *collects tables from webpages and expands them* with information retrieved from linked documents *if conditions are met* (indicated by dashed arrows and objects); then
+2) from each collected table, *generate a complex question* together with an executable SQL query by an LLM and *verify the SQL-derived answer* with an independent LLM-generated Python solution, and finally
+3) *back-translates reasoning traces* grounded in real free-form context from the verified answer.
 
 ➡️ Key takeaways:
-- Fine-tuning with 1k generated reasoning traces yields consistent improvements across 4 long-context benchmarks + our new $\pi^2$-Bench (`gpt-oss-20b`: +6.3% avg gain; `Qwen3-4B-Instruct`: +3.4% avg gain)
+- Fine-tuning with 1k generated reasoning traces yields consistent improvements across 4 long-context benchmarks + our new $\pi^2$-Bench (`gpt-oss-20b`: **+6.3%** avg gain; `Qwen3-4B-Instruct`: **+3.4%** avg gain)
 - *Faithful reasoning patterns* discovered by back translation and reasoning traces *grounded in realistic long context* are crucial for improvement
 - Self-distillation on $\pi^2$ works: `gpt-oss-20b` improves +4.4% using its own reasoning traces
 
