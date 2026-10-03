@@ -1,7 +1,8 @@
 # $\pi^2$: Structure-based Reasoning Data Improves Long-Context Reasoning Ability of Large Language Models
 
-![$\pi^2$](./media/2.jpeg)
+![$\pi^2$](./media/data_pipeline.png)
 
+[![OpenReview](https://img.shields.io/badge/OpenReview-4yDpwREyhm-802019.svg?logo=OpenReview)(https://openreview.net/forum?id=4yDpwREyhm)
 [![arXiv](https://img.shields.io/badge/Arxiv-2604.05114-AD1C18.svg?logo=arXiv)](https://arxiv.org/abs/2604.05114)
 [![Google Drive](https://img.shields.io/badge/Google%20Drive-Data-fbbd04)](https://drive.google.com/drive/folders/1ISRgLijDFvwFpHzV4tmHix6MIwIGG2gd?usp=sharing)
 <!-- # https://github.com/DataArcTech/LongFaith: Sample on how to use https://img.shields.io/badge -->
@@ -12,9 +13,9 @@
 We introduce $\pi^2$ (in plain text, Pi^2), a pipeline that 1) transforms Wikipedia tables and documents into high-quality complex multi-document QA data and 2) back-translates long-context reasoning traces from the context, question, and ground-truth answer.
 
 ➡️ Key takeaways:
-- Fine-tuning with 1k generated reasoning traces yields consistent improvements across 4 long-context benchmarks + our new $\pi^2$-Bench (`gpt-oss-20b`: +4.3% avg gain; `Qwen3-4B-Instruct`: +2.7% avg gain)
-- Self-distillation works: `gpt-oss-20b` improves +4.4% using its own reasoning traces
-- Back Translation is an important piece of our data pipeline, as it exposes the model to a broader spectrum of reasoning patterns than that of the alternative Rejection Sampling.
+- Fine-tuning with 1k generated reasoning traces yields consistent improvements across 4 long-context benchmarks + our new $\pi^2$-Bench (`gpt-oss-20b`: +6.3% avg gain; `Qwen3-4B-Instruct`: +3.4% avg gain)
+- *Faithful reasoning patterns* discovered by back translation and reasoning traces *grounded in realistic long context* are crucial for improvement
+- Self-distillation on $\pi^2$ works: `gpt-oss-20b` improves +4.4% using its own reasoning traces
 
 
 ## Setup environment
@@ -48,7 +49,7 @@ There are 6 steps:
 * Post-process and merge table, QA, and web search data. Chunk the context to 96
 * Generate reasoning traces.
 
-Please visit the base script for more details. You can run the entire script or run each step separately.
+Please visit the following bash script for more details. You can run the entire script or run each step separately.
 
 ```bash
 source datasets/ours/run.sh
@@ -78,13 +79,11 @@ The two files are in JSONL format. Each line contains many data fields that refl
 If you find our data, models, or code helpful, please consider citing our paper:
 
 ```bibtex
-@misc{do2026pi2,
-      title={$\pi^2$: Structure-Originated Reasoning Data Improves Long-Context Reasoning Ability of Large Language Models}, 
-      author={Quyet V. Do and Thinh Pham and Nguyen Nguyen and Sha Li and Pratibha Zunjare and Tu Vu},
-      year={2026},
-      eprint={2604.05114},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2604.05114}, 
+@inproceedings{do2026pi2,
+    title={$\pi^2$: Structure-Originated Reasoning Data Improves Long-Context Reasoning Ability of Large Language Models}, 
+    author={Quyet V. Do and Thinh Pham and Nguyen Nguyen and Sha Li and Pratibha Zunjare and Tu Vu},
+    booktitle={Third Conference on Language Modeling},
+    year={2026},
+    url={https://openreview.net/forum?id=4yDpwREyhm}
 }
 ```
